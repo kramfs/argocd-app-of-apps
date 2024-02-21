@@ -1,0 +1,137 @@
+###############
+## NAMESPACE ##
+###############
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aks-hello
+---
+################
+## DEPLOYMENT ##
+################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-hello
+  namespace: aks-hello
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aks-hello
+  template:
+    metadata:
+      labels:
+        app: aks-hello
+    spec:
+      containers:
+      - image: mcr.microsoft.com/azuredocs/aks-helloworld:v1
+        imagePullPolicy: Always
+        name: aks-hello
+        ports:
+        - containerPort: 80
+          name: http
+        #  protocol: TCP
+        env:
+        - name: TITLE
+          value: "Welcome to Azure Kubernetes Service (AKS)"
+        resources:
+          limits:
+            cpu: 200m
+            memory: 50Mi
+          requests:
+            cpu: 20m
+       #     memory: 20Mi
+      restartPolicy: Always
+      #tolerations:
+      #  - key: "kubernetes.azure.com/scalesetpriority"
+      #    operator: "Exists"
+      #    effect: "NoSchedule"
+---
+#############
+## SERVICE ##
+#############
+apiVersion: v1
+kind: Service
+metadata:
+  name: aks-hello-service
+  namespace: aks-hello
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+    #protocol: TCP
+  selector:
+    app: aks-hello
+  sessionAffinity: None
+#---
+#############
+## INGRESS ##
+#############
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: ingress
+#  namespace: aks-hello
+#  annotations:
+#    kubernetes.io/ingress.class: nginx
+#    #nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#    #nginx.ingress.kubernetes.io/use-regex: "true"
+#    #nginx.ingress.kubernetes.io/rewrite-target: /$1
+#spec:
+#  rules:
+#  #- host: "*.foo.com"
+#  #-  http:
+#  - host: "ingress-aks.btotest.com"
+#    http:
+#      paths:
+#      - pathType: ImplementationSpecific
+#        path: "/"
+#        backend:
+#          service:
+#            name: aks-hello-service
+#            port:
+#              number: 80
+---
+#########
+## HPA ##
+#########
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aks-hello-hpa
+  namespace: aks-hello
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: aks-hello
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 90
+  #- type: Pods
+  #  pods:
+  #    metric:
+  #      name: packets-per-second
+  #    target:
+  #      type: AverageValue
+  #      averageValue: 1k
+  #- type: Object
+  #  object:
+  #    metric:
+  #      name: requests-per-second
+  #    describedObject:
+  #      apiVersion: networking.k8s.io/v1
+  #      kind: Ingress
+  #      name: main-route
+  #    target:
+  #      type: Value
+  #      value: 10k

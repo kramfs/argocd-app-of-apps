@@ -1,0 +1,133 @@
+###############
+## NAMESPACE ##
+###############
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello-test
+---
+################
+## DEPLOYMENT ##
+################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-test
+  namespace: hello-test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-test
+  template:
+    metadata:
+      labels:
+        app: hello-test
+    spec:
+      containers:
+      - image: paulbouwer/hello-kubernetes:1.10.1
+        imagePullPolicy: Always
+        name: hello-test
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 50Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+      restartPolicy: Always
+      #tolerations:
+      #  - key: "kubernetes.azure.com/scalesetpriority"
+      #    operator: "Exists"
+      #    effect: "NoSchedule"
+---
+#############
+## SERVICE ##
+#############
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-test-service
+  namespace: hello-test
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: hello-test
+  sessionAffinity: None
+#---
+#############
+## INGRESS ##
+#############
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: ingress
+#  namespace: hello-test
+#  annotations:
+#    kubernetes.io/ingress.class: nginx
+#    #nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#    #nginx.ingress.kubernetes.io/use-regex: "true"
+#    #nginx.ingress.kubernetes.io/rewrite-target: /$1
+#spec:
+#  rules:
+#  #- host: "*.foo.com"
+#  #-  http:
+#  - host: "ingress-hello.btotest.com"
+#    http:
+#      paths:
+#      - pathType: Prefix
+#        path: "/"
+#        backend:
+#          service:
+#            name: hello-test-service
+#            port:
+#              number: 80
+---
+#########
+## HPA ##
+#########
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hello-test-hpa
+  namespace: hello-test
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hello-test
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  #- type: Pods
+  #  pods:
+  #    metric:
+  #      name: packets-per-second
+  #    target:
+  #      type: AverageValue
+  #      averageValue: 1k
+  #- type: Object
+  #  object:
+  #    metric:
+  #      name: requests-per-second
+  #    describedObject:
+  #      apiVersion: networking.k8s.io/v1
+  #      kind: Ingress
+  #      name: main-route
+  #    target:
+  #      type: Value
+  #      value: 10k
