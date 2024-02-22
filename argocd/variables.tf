@@ -1,0 +1,2 @@
+variable "minikube" {}
+variable "argocd" {}

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name:  aks-hello
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    #namespace: helm-guestbook
+    #name: in-cluster                           # Check the cluster name with "argocd cluster add"
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications/aks-hello
+    repoURL: https://github.com/kramfs/argocd-app-of-apps
+    targetRevision: HEAD

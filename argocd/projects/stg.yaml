@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Project
+metadata:
+  name: stg
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: For STG Deployments
+  destinations:
+  - name: '*'
+    namespace: '*'
+    server: https://kubernetes.default.svc
+  orphanedResources: {}
