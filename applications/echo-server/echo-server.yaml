@@ -26,7 +26,7 @@ spec:
       labels:
         app: echo-server
     spec:
-      serviceAccountName: workload-identity-sa          # Workload Identity Service Account Name
+    #  serviceAccountName: workload-identity-sa          # Workload Identity Service Account Name
       containers:
       - name: echo-server
         image: jmalloc/echo-server
