@@ -33,10 +33,10 @@ spec:
           protocol: TCP
         resources:
           limits:
-            cpu: 200m
+            cpu: 100m
             memory: 50Mi
           requests:
-            cpu: 20m
+            cpu: 10m
           #  memory: 50Mi
       restartPolicy: Always
       #tolerations:
