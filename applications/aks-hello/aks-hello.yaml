@@ -109,7 +109,7 @@ spec:
     kind: Deployment
     name: aks-hello
   minReplicas: 2
-  maxReplicas: 10
+  maxReplicas: 4
   metrics:
   - type: Resource
     resource:

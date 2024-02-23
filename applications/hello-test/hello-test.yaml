@@ -36,8 +36,8 @@ spec:
             cpu: 200m
             memory: 50Mi
           requests:
-            cpu: 50m
-            memory: 50Mi
+            cpu: 20m
+          #  memory: 50Mi
       restartPolicy: Always
       #tolerations:
       #  - key: "kubernetes.azure.com/scalesetpriority"
@@ -104,8 +104,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: hello-test
-  minReplicas: 2
-  maxReplicas: 10
+  minReplicas: 1
+  maxReplicas: 4
   metrics:
   - type: Resource
     resource:
