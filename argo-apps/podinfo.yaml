@@ -15,6 +15,8 @@ spec:
     path: applications/podinfo
     repoURL: https://github.com/kramfs/argocd-app-of-apps
     targetRevision: HEAD
+    directory:
+      recurse: true
 
   # Sync policy
   syncPolicy:

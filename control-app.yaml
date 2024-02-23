@@ -1,20 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-app
+  name: control-app
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: default
+    namespace: argocd
     name: in-cluster
   project: default
   source:
     path: argo-apps  # contains application spec files
     repoURL: https://github.com/kramfs/argocd-app-of-apps
     targetRevision: HEAD
-
+    directory:
+      recurse: true
   # Sync policy
   syncPolicy:
     automated:
