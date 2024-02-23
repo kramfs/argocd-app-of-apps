@@ -68,7 +68,7 @@ metadata:
   name: echo-server-service
   namespace: echo-server
 spec:
-  type: ClusterIP
+  type: LoadBalancer        # ClusterIP
   selector:
     app: echo-server
   sessionAffinity: None
@@ -77,9 +77,6 @@ spec:
       port: 80
       targetPort: 8080
       protocol: TCP
-#spec:
-#  type: ExternalName
-#  externalName: echo-server-service.echo-server.svc.cluster.local
 
 #---
 #############
