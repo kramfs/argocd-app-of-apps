@@ -9,8 +9,8 @@ spec:
   destination:
     #namespace: helm-guestbook
     #name: in-cluster                           # Check the cluster name with "argocd cluster add"
-    #server: https://kubernetes.default.svc
-    server: {{ .Values.spec.destination.server }}
+    server: https://kubernetes.default.svc
+    #server: {{ .Values.spec.destination.server }}
   project: default
   source:
     path: applications/echo-server
