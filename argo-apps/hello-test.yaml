@@ -1,3 +1,4 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -18,9 +19,9 @@ spec:
 
   # Sync policy
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  #  automated:
+  #    prune: true
+  #    selfHeal: true
     # The retry feature is available since v1.7
     retry:
       limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
