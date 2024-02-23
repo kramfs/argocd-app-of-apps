@@ -12,6 +12,7 @@ tasks:
 
   init:
     internal: true
+    dir: argocd
     cmds:
       - terraform init -upgrade
 
@@ -22,11 +23,13 @@ tasks:
 
   apply:
     internal: true
+    dir: argocd
     cmds:
       - terraform apply $TF_AUTO
 
   destroy:
     internal: true
+    dir: argocd
     cmds:
       - terraform destroy $TF_AUTO
 
@@ -52,13 +55,16 @@ tasks:
 
   up:
     desc: "Bring up the cluster"
+    dir: argocd
     cmds:
       - task: init
       - task: apply
       - task: argo-credentials
+      - kubectl apply -f ../control-app.yaml
 
   cleanup:
     desc: "Destroy and clean up the cluster"
+    dir: argocd
     cmds:
       - task: destroy
       - find . -name '*terraform*' -print | xargs rm -Rf
