@@ -14,10 +14,10 @@ spec:
   project: default
   source:
     path: applications/echo-server
-    #repoURL: https://github.com/kramfs/argocd-app-of-apps
-    repoURL: {{ .Values.spec.source.repoURL }}
-    #targetRevision: HEAD
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    repoURL: https://github.com/kramfs/argocd-app-of-apps
+    targetRevision: HEAD
+    #repoURL: {{ .Values.spec.source.repoURL }}
+    #targetRevision: {{ .Values.spec.source.targetRevision }}
 
   # Sync policy
   syncPolicy:
