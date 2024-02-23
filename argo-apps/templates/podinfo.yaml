@@ -14,8 +14,8 @@ spec:
   project: default
   source:
     path: applications/podinfo
-    repoURL: https://github.com/kramfs/argocd-app-of-apps
-    targetRevision: HEAD
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
     directory:
       recurse: true
 

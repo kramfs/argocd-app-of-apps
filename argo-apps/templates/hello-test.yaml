@@ -1,7 +1,8 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name:  echo-server
+  name:  hello-test
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -13,9 +14,9 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: applications/echo-server
-    repoURL: https://github.com/kramfs/argocd-app-of-apps
-    targetRevision: HEAD
+    path: applications/hello-test
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
 
   # Sync policy
   syncPolicy:
