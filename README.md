@@ -143,4 +143,51 @@ To destroy and clean up the cluster:
 task cleanup
 ```
 
+Example:
+
+```
+❯ task cleanup
+task: [destroy] terraform destroy $TF_AUTO
+module.minikube_cluster.minikube_cluster.docker: Refreshing state... [id=minikube]
+helm_release.argocd: Refreshing state... [id=argocd]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # helm_release.argocd will be destroyed
+  - resource "helm_release" "argocd" {
+  ...
+  }
+
+  # module.minikube_cluster.minikube_cluster.docker will be destroyed
+  - resource "minikube_cluster" "docker" {
+  ...
+  }
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+
+Changes to Outputs:
+  - minikube_domain = "cluster.local" -> null
+  - minikube_ip     = "https://192.168.49.2:8443" -> null
+  - minikube_name   = "minikube" -> null
+helm_release.argocd: Destroying... [id=argocd]
+helm_release.argocd: Destruction complete after 1s
+module.minikube_cluster.minikube_cluster.docker: Destroying... [id=minikube]
+module.minikube_cluster.minikube_cluster.docker: Destruction complete after 3s
+╷
+│ Warning: Helm uninstall returned an information message
+│ 
+│ These resources were kept due to the resource policy:
+│ [CustomResourceDefinition] applications.argoproj.io
+│ [CustomResourceDefinition] applicationsets.argoproj.io
+│ [CustomResourceDefinition] appprojects.argoproj.io
+│ 
+╵
+
+Destroy complete! Resources: 2 destroyed.
+task: [cleanup] find . -name '*terraform*' -print | xargs rm -Rf
+```
+
 Typing `task` will show up the available options
