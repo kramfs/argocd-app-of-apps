@@ -1,4 +1,6 @@
 # Usage
+
+## TASK UP
 To bring up the cluster:
 ```
 task up
@@ -138,6 +140,7 @@ otherwise it will be stuck in pending state and the message with keep repeating 
 helm_release.argocd: Still creating...
 ```
 
+## TASK CLEANUP
 To destroy and clean up the cluster:
 ```
 task cleanup
