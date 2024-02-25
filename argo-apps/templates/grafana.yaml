@@ -19,7 +19,6 @@ spec:
         - ./values.yaml
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: nginx
 
   # Sync policy
   syncPolicy:
