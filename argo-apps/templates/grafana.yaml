@@ -8,7 +8,7 @@ spec:
   source:
     chart: grafana
     repoURL: https://github.com/kramfs/argocd-app-of-apps/applications/
-    #targetRevision: 1.16.1
+    targetRevision: HEAD
     helm:
       releaseName: grafana
       valueFiles:
