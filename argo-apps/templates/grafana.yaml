@@ -11,7 +11,7 @@ spec:
     #targetRevision: 1.16.1
     helm:
       releaseName: grafana
-      valueFiles: values.yaml
+      valueFiles: ./values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: grafana
