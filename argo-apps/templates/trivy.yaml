@@ -8,10 +8,10 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/kramfs/argocd-app-of-apps/applications
-    chart: trivy
+    repoURL: https://github.com/kramfs/argocd-app-of-apps
+    #chart: trivy
     #path: applications/grafana
-    #path: applications/nginx
+    path: applications/trivy
     targetRevision: HEAD
     helm:
       releaseName: trivy
