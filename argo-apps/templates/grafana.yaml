@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: grafana
+    repoURL: https://github.com/kramfs/argocd-app-of-apps
+    #targetRevision: 1.16.1
+    helm:
+      releaseName: grafana
+      valueFiles: values.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: grafana
