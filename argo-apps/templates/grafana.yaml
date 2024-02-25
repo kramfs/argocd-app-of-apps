@@ -19,7 +19,7 @@ spec:
         - ./values.yaml
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: grafana
+    namespace: nginx
 
   # Sync policy
   syncPolicy:
