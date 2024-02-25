@@ -1,4 +1,4 @@
-# Default values for grafana.
+# Default values for nginx.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -40,7 +40,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: LoadBalancer     # ClusterIP
+  type: LoadBalancer   # ClusterIP
   port: 80
 
 ingress:
