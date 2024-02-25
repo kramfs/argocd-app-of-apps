@@ -3,11 +3,14 @@ kind: Application
 metadata:
   name: grafana
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    chart: grafana
-    repoURL: https://github.com/kramfs/argocd-app-of-apps/applications/
+    repoURL: https://github.com/kramfs/argocd-app-of-apps/
+    #chart: grafana
+    path: applications/grafana
     targetRevision: HEAD
     helm:
       releaseName: grafana
