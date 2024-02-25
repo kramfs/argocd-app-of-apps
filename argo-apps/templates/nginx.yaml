@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana
+  name: nginx
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -11,10 +11,10 @@ spec:
     repoURL: https://github.com/kramfs/argocd-app-of-apps/
     #chart: grafana
     #path: applications/grafana
-    path: applications/grafana
+    path: applications/nginx
     targetRevision: HEAD
     helm:
-      releaseName: grafana
+      releaseName: nginx
       valueFiles:
         - ./values.yaml
   destination:
