@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/kramfs/argocd-app-of-apps/applications/
     chart: trivy
-    path: applications/grafana
+    #path: applications/grafana
     #path: applications/nginx
     targetRevision: HEAD
     helm:
