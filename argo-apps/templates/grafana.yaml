@@ -10,6 +10,7 @@ spec:
   source:
     repoURL: https://github.com/kramfs/argocd-app-of-apps/
     #chart: grafana
+    #path: applications/grafana
     path: applications/grafana
     targetRevision: HEAD
     helm:
