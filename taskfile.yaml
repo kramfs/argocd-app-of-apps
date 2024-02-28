@@ -28,7 +28,7 @@ tasks:
       - terraform apply $TF_AUTO
 
   destroy:
-    internal: true
+    desc: "Reset the app, perform Terraform destroy"
     dir: argocd
     cmds:
       - terraform destroy $TF_AUTO
