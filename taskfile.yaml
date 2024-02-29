@@ -29,6 +29,7 @@ tasks:
 
   destroy:
     desc: "Reset the app, perform Terraform destroy"
+    internal: true
     dir: argocd
     cmds:
       - terraform destroy $TF_AUTO
@@ -36,10 +37,12 @@ tasks:
   argo-credentials:
     desc: "Show the initial ArgoCD admin credential"
     internal: true
+    silent: true
     preconditions:
       # Fail when the k8s cluster is not running
       - $KUBE_GET
     cmds:
+      - echo "Username is admin"
       - echo $(kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
 
   argo-ip:
@@ -51,7 +54,20 @@ tasks:
       #- kubectl get all
       - $KUBE_GET
     cmds:
-      - kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+      - echo ""
+      - echo "To view the ArgoCD UI, open https://"$(kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+  deploy-app:
+    desc: "Deploy ArgoCD Apps"
+    dir: argo-apps
+    cmds:
+      - kubectl apply -f control-app.yaml
+
+  destroy-app:
+    desc: "Remove the ArgoCD Apps"
+    dir: argo-apps
+    cmds:
+      - kubectl delete -f control-app.yaml
 
   up:
     desc: "Bring up the cluster"
@@ -59,8 +75,9 @@ tasks:
     cmds:
       - task: init
       - task: apply
+      - task: argo-ip
       - task: argo-credentials
-      - kubectl apply -f ../control-app.yaml
+      #- kubectl apply -f ../control-app.yaml
 
   cleanup:
     desc: "Destroy and clean up the cluster"

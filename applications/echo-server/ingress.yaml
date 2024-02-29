@@ -1,0 +1,27 @@
+#############
+## INGRESS ##
+#############
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: echo-server
+#  namespace: echo-server
+#  annotations:
+#    kubernetes.io/ingress.class: nginx
+#    #nginx.ingress.kubernetes.io/ssl-redirect: "true"
+#spec:
+#  #ingressClassName: nginx
+#  tls:
+#  - hosts:
+#    - ingress-echo-server.dev.internal
+#  rules:
+#  - host: ingress-echo-server.dev.internal
+#    http:
+#      paths:
+#      - path: /
+#        pathType: ImplementationSpecific
+#        backend:
+#          service:
+#            name: echo-server-service
+#            port:
+#              number: 80

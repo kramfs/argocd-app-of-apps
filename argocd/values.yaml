@@ -1,7 +1,7 @@
 ## Application controller
 controller:
   ## -- Resource limits and requests for the Argo CD server
-  resources:
+  #resources:
   #  limits:
   #    cpu: 100m
   #    memory: 128Mi
@@ -51,4 +51,4 @@ server:
     enabled: true
 
   service:
-    type: LoadBalancer       # Values: ClusterIP, LoadBalancer, NodeIP
+    type: ${server_service_type}       # Value derived from the input for Terraform variable "var.argocd.server_service_type". Options: ClusterIP, LoadBalancer, NodeIP

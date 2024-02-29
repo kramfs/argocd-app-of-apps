@@ -11,7 +11,8 @@ argocd = {
   namespace        = "argocd"
   create_namespace = true
 
-  repository = "https://argoproj.github.io/argo-helm"
-  chart      = "argo-cd"
-  #version    = "4.9.1" # Chart version
+  repository      = "https://argoproj.github.io/argo-helm"
+  chart           = "argo-cd"
+  #version        = "4.9.1"                   # Chart version
+  server_service_type  = "LoadBalancer"          # Values: ClusterIP, LoadBalancer, NodeIP
 }

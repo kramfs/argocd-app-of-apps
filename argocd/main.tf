@@ -61,7 +61,11 @@ resource "helm_release" "argocd" {
   chart      = var.argocd.chart
   version    = lookup(var.argocd, "version", null) # Chart version
 
-  values = [
-    file("./values.yaml")
-  ]
+  #values = [
+  #  file("./values.yaml")
+  #]
+
+  values = [templatefile("values.yaml", {
+    server_service_type = var.argocd.server_service_type
+  })]
 }

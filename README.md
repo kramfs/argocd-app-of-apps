@@ -119,9 +119,11 @@ Outputs:
 minikube_domain = "cluster.local"
 minikube_ip = "https://192.168.49.2:8443"
 minikube_name = "minikube"
-task: [argo-credentials] echo $(kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
-zU-KwcQpewdf8mIF
-task: [up] kubectl apply -f ../control-app.yaml
+
+To view the ArgoCD UI, open https://10.98.36.248
+Username is admin
+YpP1CmhN-nGjWqAN
+
 application.argoproj.io/control-app created
 
 ```
@@ -139,6 +141,18 @@ otherwise it will be stuck in pending state and the message with keep repeating 
 ```
 helm_release.argocd: Still creating...
 ```
+
+## APPLICATION WORKFLOW
+
+To deploy the app:
+```
+task deploy-app
+```
+To remove the app:
+```
+task deploy-app
+```
+
 
 ## TASK CLEANUP
 To destroy and clean up the cluster:

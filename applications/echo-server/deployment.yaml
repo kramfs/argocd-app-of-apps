@@ -1,0 +1,52 @@
+################
+## DEPLOYMENT ##
+################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-server
+  namespace: echo-server
+  #labels:
+  #  azure.workload.identity/use: "true"
+spec:
+  #replicas: 2
+  selector:
+    matchLabels:
+      app: echo-server
+  template:
+    metadata:
+      labels:
+        app: echo-server
+    spec:
+    #  serviceAccountName: workload-identity-sa          # Workload Identity Service Account Name
+      containers:
+      - name: echo-server
+        image: jmalloc/echo-server
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http-pod
+          protocol: TCP
+
+#        livenessProbe:
+#          httpGet:
+#            path: /ping
+#            port: http-pod        # See value in ports.containerPort
+#          failureThreshold: 1
+#          periodSeconds: 10
+
+#        startupProbe:
+#          httpGet:
+#            path: /version
+#            port: http-pod        # See value in ports.containerPort
+#          failureThreshold: 20
+#          periodSeconds: 10
+#          initialDelaySeconds: 10
+
+        resources:
+          limits:
+            cpu: 100m
+            memory: 50Mi
+          requests:
+            cpu: 10m
+        #    memory: 50Mi

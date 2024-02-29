@@ -1,6 +1,22 @@
+#spec:
+#  destination:
+#    server: https://kubernetes.default.svc
+#  source:
+#    repoURL: https://github.com/kramfs/argocd-app-of-apps
+#    targetRevision: HEAD
 spec:
   destination:
-    server: https://kubernetes.default.svc
+    namespace: argocd
+    name: in-cluster
+  project: default
   source:
+    path: argo-apps  # contains application spec files
     repoURL: https://github.com/kramfs/argocd-app-of-apps
     targetRevision: HEAD
+    directory:
+      recurse: true     # Traverse the directory and apply
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
