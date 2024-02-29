@@ -150,7 +150,7 @@ task deploy-app
 ```
 To remove the app:
 ```
-task deploy-app
+task destroy-app
 ```
 
 
