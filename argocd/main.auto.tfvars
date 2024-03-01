@@ -13,6 +13,7 @@ argocd = {
 
   repository      = "https://argoproj.github.io/argo-helm"
   chart           = "argo-cd"
-  #version        = "4.9.1"                   # Chart version
-  server_service_type  = "LoadBalancer"          # Values: ClusterIP, LoadBalancer, NodeIP
+  #version        = "4.9.1"               # Chart version
+  server_service_type  = "LoadBalancer"   # Values: ClusterIP, LoadBalancer, NodeIP
+  timeout_reconciliation = "10s"          # Default: 180s. Reconciliation timeout (drift) how often it will sync ArgoCD with the Git repository.
 }

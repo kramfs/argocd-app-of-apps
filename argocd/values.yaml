@@ -52,3 +52,13 @@ server:
 
   service:
     type: ${server_service_type}       # Value derived from the input for Terraform variable "var.argocd.server_service_type". Options: ClusterIP, LoadBalancer, NodeIP
+
+##################
+## Argo Configs ##
+##################
+configs:
+  # General Argo CD configuration
+  ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
+  cm:
+    # Default: 180s. Reconciliation timeout (drift) is responsible for how often it will sync ArgoCD with the Git repository.
+    timeout.reconciliation: ${timeout_reconciliation}

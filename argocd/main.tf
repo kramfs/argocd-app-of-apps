@@ -67,5 +67,6 @@ resource "helm_release" "argocd" {
 
   values = [templatefile("values.yaml", {
     server_service_type = var.argocd.server_service_type
+    timeout_reconciliation = var.argocd.timeout_reconciliation      # Reconciliation timeout (drift) how often it will sync ArgoCD with the Git repository.
   })]
 }
