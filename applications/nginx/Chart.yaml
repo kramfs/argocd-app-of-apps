@@ -2,7 +2,7 @@ apiVersion: v2
 name: nginx
 description: A Helm chart for Kubernetes
 
-home:
+home: https://nginx.org/
 icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
 sources:
  - https://hg.nginx.org/nginx/
