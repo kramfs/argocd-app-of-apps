@@ -16,7 +16,7 @@ spec:
     helm:
       releaseName: nginx
       valueFiles:
-        - ./values.yaml
+        - values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nginx
