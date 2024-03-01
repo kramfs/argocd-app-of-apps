@@ -6,6 +6,7 @@ keywords:
 - trivyoperator
 - trivy
 name: trivy-operator
+icon: https://aquasecurity.github.io/trivy/test/imgs/logo.png
 sources:
 - https://github.com/aquasecurity/trivy-operator
 type: application
