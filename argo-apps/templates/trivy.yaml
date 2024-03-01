@@ -26,6 +26,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
     # The retry feature is available since v1.7
     retry:
       limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
