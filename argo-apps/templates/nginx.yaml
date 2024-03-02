@@ -9,9 +9,9 @@ spec:
   project: default
   source:
     repoURL: https://github.com/kramfs/argocd-app-of-apps/
-    #chart: grafana
+    chart: applications/nginx
     #path: applications/grafana
-    path: applications/nginx
+    #path: applications/nginx
     targetRevision: HEAD
     helm:
       releaseName: nginx
