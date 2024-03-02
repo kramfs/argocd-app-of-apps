@@ -9,7 +9,6 @@ spec:
   project: default
   source:
     repoURL: https://github.com/kramfs/argocd-app-of-apps/tree/applications/nginx
-    gc
     chart: nginx
     #path: applications/grafana
     #path: applications/nginx
