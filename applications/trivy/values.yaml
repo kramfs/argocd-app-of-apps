@@ -150,7 +150,8 @@ service:
   metricsPort: 80
   # -- annotations added to the operator's service
   annotations: {}
-  type: ClusterIP
+  type: ClusterIP   # ClusterIP, LoadBalancer
+  port: 80
 
 # -- Prometheus ServiceMonitor configuration -- to install the trivy operator with the ServiceMonitor
 # you must have Prometheus already installed and running. If you do not have Prometheus installed, enabling this will
