@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/kramfs/argocd-app-of-apps/tree/main/applications/nginx
+    repoURL: https://github.com/kramfs/argocd-app-of-apps/tree/main/applications
     chart: nginx
     #path: applications/grafana
     #path: applications/nginx
