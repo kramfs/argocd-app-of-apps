@@ -189,6 +189,8 @@ service:
   annotations: {}
   # -- appProtocol of the monitoring service
   metricsAppProtocol: TCP
+  type: ClusterIP
+  port: 80
 
 # -- Prometheus ServiceMonitor configuration -- to install the trivy operator with the ServiceMonitor
 # you must have Prometheus already installed and running. If you do not have Prometheus installed, enabling this will
