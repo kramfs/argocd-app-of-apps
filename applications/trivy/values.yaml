@@ -672,7 +672,7 @@ nodeCollector:
         path: /etc/cni/net.d/
 
 
-#ingress:
-#  enabled: false
+ingress:
+  enabled: false
 #autoscaling:
 #  enabled: false
