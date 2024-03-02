@@ -674,5 +674,5 @@ nodeCollector:
 
 ingress:
   enabled: false
-#autoscaling:
-#  enabled: false
+autoscaling:
+  enabled: false
