@@ -14,7 +14,7 @@ spec:
     #path: applications/grafana
     #path: applications/nginx
     #targetRevision: HEAD
-    targetRevision: 1.16.0
+    targetRevision: 0.1.0
     helm:
       releaseName: nginx
       valueFiles:
