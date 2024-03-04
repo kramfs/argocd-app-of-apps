@@ -11,5 +11,5 @@ urls:
 - https://kramfs.github.io/argocd-app-of-apps/applications/charts
 
 type: application
-appVersion: "1.16.0"
+appVersion: 1.16.0
 maintainers:
