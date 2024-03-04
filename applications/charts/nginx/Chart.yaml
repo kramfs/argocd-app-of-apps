@@ -5,8 +5,10 @@ description: A Helm chart for Kubernetes
 home: https://nginx.org/
 icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
 version: 0.1.0
-sources:
- - https://hg.nginx.org/nginx/
+#sources:
+# - https://hg.nginx.org/nginx/
+urls:
+- https://kramfs.github.io/argocd-app-of-apps/applications/charts
 
 type: application
 appVersion: "1.16.0"
