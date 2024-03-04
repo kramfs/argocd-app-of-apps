@@ -3,16 +3,14 @@ entries:
   nginx:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-03-03T17:33:16.267530436+08:00"
+    created: "2024-03-04T10:35:26.22640177+08:00"
     description: A Helm chart for Kubernetes
-    digest: be89df59de96e1f373c74410da40c9be06b8360d235e1164862bbb622b633f9e
+    digest: 5f9fb15ca44ce3c461f949df2f93e6576c40db4ea7bc034f46f187f8ef370be3
     home: https://nginx.org/
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
     name: nginx
-    sources:
-    - https://hg.nginx.org/nginx/
     type: application
     urls:
-    - https://github.com/kramfs/argocd-app-of-apps/applications/charts/nginx-0.1.0.tgz
+    - https://kramfs.github.io/argocd-app-of-apps/applications/charts/nginx-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-03T17:33:16.266974703+08:00"
+generated: "2024-03-04T10:35:26.225987962+08:00"
