@@ -6,6 +6,21 @@ minikube = {
   nodes              = "1"
 }
 
+# METALLB
+metallb = {
+  install           = true
+  name              = "metallb-system"
+  namespace         = "metallb-system"
+  create_namespace  = true
+
+  repository        = "https://metallb.github.io/metallb"
+  chart             = "metallb"
+  #version          = "4.9.1" # Chart version
+  serviceMonitor_enabled = false
+}
+
+
+# ARGOCD
 argocd = {
   name             = "argocd"
   namespace        = "argocd"

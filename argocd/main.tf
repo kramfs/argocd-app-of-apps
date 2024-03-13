@@ -36,7 +36,7 @@ resource "time_sleep" "wait_15_seconds" {
 ## HELM SECTION ##
 ##################
 
-# HELM PROVIDER
+## HELM PROVIDER ##
 provider "helm" {
   kubernetes {
     host = module.minikube_cluster.minikube_cluster_host
@@ -47,11 +47,36 @@ provider "helm" {
 }
 
 
-# HELM RELEASE
-# REF: https://artifacthub.io/packages/helm/bitnami/nginx
-# HELM: helm upgrade ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --dry-run
-# https://artifacthub.io/packages/helm/bitnami/nginx
+## HELM RELEASE ##
 
+# METALLB
+# REF: https://artifacthub.io/packages/helm/metallb/metallb
+resource "helm_release" "metallb" {
+  count             = var.metallb.install ? 1 : 0
+  name              = var.metallb.name
+  namespace         = var.metallb.namespace
+  create_namespace  = var.metallb.create_namespace
+
+  repository = var.metallb.repository
+  chart      = var.metallb.chart
+  version    = lookup(var.metallb, "version", null) # Chart version
+
+  values = [
+    templatefile("./helm_values/metallb-system.yaml", {
+      serviceMonitor_enabled = lookup(var.metallb, "serviceMonitor_enabled", false) # Check if servicemonitor will be enabled
+    })
+  ]
+
+  provisioner "local-exec" {
+    command = "kubectl apply -f ./helm_values/metallb-system-config.yaml"
+  }
+
+  #depends_on = [ helm_release.prometheus-stack ]
+  #timeout = 600         # In seconds
+}
+
+# ARGOCD
+# REF: https://artifacthub.io/packages/helm/bitnami/nginx
 resource "helm_release" "argocd" {
   name             = var.argocd.name
   namespace        = var.argocd.namespace
@@ -65,7 +90,7 @@ resource "helm_release" "argocd" {
   #  file("./values.yaml")
   #]
 
-  values = [templatefile("values.yaml", {
+  values = [templatefile("./helm_values/argocd.yaml", {
     server_service_type = var.argocd.server_service_type
     timeout_reconciliation = var.argocd.timeout_reconciliation      # Reconciliation timeout (drift) how often it will sync ArgoCD with the Git repository.
   })]
