@@ -2,7 +2,7 @@ prometheus:
   serviceMonitor:
     enabled: ${serviceMonitor_enabled}              # This will be filled with the value of "var.metallb.serviceMonitor_enabled"
   serviceAccount: "kube-prometheus-stack-operator"
-  #namespace: var.prometheus-stack.namespace     # Value derived from the input for Terraform "resource.helm_release.prometheus-stack.namespace"
+  namespace: var.prometheus-stack.namespace     # Value derived from the input for Terraform "resource.helm_release.prometheus-stack.namespace"
 
 #speaker:
 #  frr:
