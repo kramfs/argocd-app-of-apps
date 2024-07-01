@@ -16,7 +16,6 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true     # Traverse the directory and apply
-  # Sync policy
   syncPolicy:
     automated:
       prune: true
