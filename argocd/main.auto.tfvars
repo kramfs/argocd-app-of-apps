@@ -1,8 +1,8 @@
 minikube = {
   cluster_name       = "minikube"
   driver             = "docker" # Options: docker, podman, kvm2, qemu, hyperkit, hyperv, ssh
-  kubernetes_version = "v1.28.3"  # See available options: "minikube config defaults kubernetes-version" or refer to: https://kubernetes.io/releases/
-  container_runtime  = "containerd" # Options: docker, containerd, cri-o
+  kubernetes_version = "v1.30.2"  # See available options: "minikube config defaults kubernetes-version" or refer to: https://kubernetes.io/releases/
+  container_runtime  = "docker" # Options: docker, containerd, cri-o
   nodes              = "2"
 }
 
