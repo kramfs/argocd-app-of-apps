@@ -105,6 +105,7 @@ tasks:
       - task: apply
       - task: argo-ip
       - task: argo-credentials
+      - task: argo-cli-login
       #- kubectl apply -f ../control-app.yaml
 
   cleanup:
