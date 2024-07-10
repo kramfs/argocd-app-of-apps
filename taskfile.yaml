@@ -57,6 +57,34 @@ tasks:
       - echo ""
       - echo "To view the ArgoCD UI, open https://"$(kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
+  argo-cli-login:
+    desc: "Login to ArgoCD using Argo CLI"
+    internal: false
+    silent: true
+    preconditions:
+      # Fail when the k8s cluster is not running
+      #- kubectl get all
+      - $KUBE_GET
+    cmds:
+      - echo ""
+      - printf "To login via ArgoCD CLI, run:\n argocd login --insecure --username admin --password $(kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d) $(kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):$(kubectl get svc argocd-server -n argocd -o jsonpath='{.spec.ports[1].port}')\n\n"
+      - printf "Running...\n"
+      - argocd login --insecure --username admin --password $(kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d) $(kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):$(kubectl get svc argocd-server -n argocd -o jsonpath='{.spec.ports[1].port}')
+
+  argo-cli-logout:
+    desc: "Logout from Argo CLI"
+    internal: false
+    silent: true
+    preconditions:
+      # Fail when the k8s cluster is not running
+      #- kubectl get all
+      - $KUBE_GET
+    cmds:
+      - echo ""
+      - printf "To logout from ArgoCD CLI, run:\n argocd logout $(kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):$(kubectl get svc argocd-server -n argocd -o jsonpath='{.spec.ports[1].port}')\n\n"
+      - printf "Running...\n"
+      - argocd logout $(kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):$(kubectl get svc argocd-server -n argocd -o jsonpath='{.spec.ports[1].port}')
+
   deploy-app:
     desc: "Deploy ArgoCD Apps"
     dir: argo-apps
